@@ -10,6 +10,7 @@ import {
   Anchor,
   rem,
 } from '@mantine/core';
+import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -40,11 +41,32 @@ const useStyles = createStyles((theme) => ({
 
 export default function App() {
 
-  const login = (user: string, pass: string) => {
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
 
-    fetch("https://expreess-db.onrender.com", {
+  const login = (user?: string, pass?: string) => {
+
+    fetch("https://expreess-db.onrender.com/users/"+user+"/"+pass, {
       method: "GET",
     }).then(response => alert(response))
+
+  }
+
+  const newUsername = (event: any) => {
+
+    setUsername(event.target.value)
+    
+  }
+
+  const newPassword = (event: any) => {
+
+    setPassword(event.target.value)
+
+  }
+
+  const startLogin = () => {
+
+    login(username, password)
 
   }
 
@@ -56,10 +78,10 @@ export default function App() {
           Duc Duc Nuk!
         </Title>
 
-        <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-        <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
+        <TextInput label="Email address" placeholder="hello@gmail.com" size="md" value={username} onChange={newUsername}/>
+        <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" value={password} onChange={newPassword}/>
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button fullWidth mt="xl" size="md">
+        <Button fullWidth mt="xl" size="md" onClick={startLogin}>
           Login
         </Button>
 
