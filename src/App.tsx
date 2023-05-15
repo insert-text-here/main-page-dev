@@ -39,12 +39,21 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function App() {
+
+  const login = (user: string, pass: string) => {
+
+    fetch("https://expreess-db.onrender.com", {
+      method: "GET",
+    }).then(response => alert(response))
+
+  }
+
   const { classes } = useStyles();
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
         <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-          Welcome back to Mantine!
+          Duc Duc Nuk!
         </Title>
 
         <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
